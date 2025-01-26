@@ -16,6 +16,7 @@ $student_ids = $_POST['student_ids'] ?? [];
 $today = date('Y-m-d');
 
 foreach ($student_ids as $record) {
+    print_r($record);
     list($student_id, $phone, $name) = explode('-', $record);
     // Insert or update attendance record
     $stmt = $conn->prepare("INSERT INTO attendance (student_id, course_id, date, status) VALUES (?, ?, ?, 'present') ON DUPLICATE KEY UPDATE status = 'present'");
@@ -23,7 +24,7 @@ foreach ($student_ids as $record) {
     $stmt->execute();
 
     // Call the REST API
-    $message = "Dear $name,\n\nYour attendance has been marked successfully.\n\nBest regards,\nTuition Class Management System";
+    $message = "This is a test message";
     $api_url = "https://app.notify.lk/api/v1/send?user_id=28901&api_key=ZigKDUc4CD06laWrhz7D&sender_id=NotifyDEMO&to=$phone&message=$message";
     $ch = curl_init();
 
