@@ -5,7 +5,7 @@ include 'db.php';
 $course_id = $_POST['course_id'] ?? 0;
 
 // Fetch students from the selected course
-$students = $conn->prepare("SELECT id, name FROM student WHERE course_id = ?");
+$students = $conn->prepare("SELECT id, name, phone FROM student WHERE course_id = ?");
 $students->bind_param("i", $course_id);
 $students->execute();
 $result = $students->get_result();
