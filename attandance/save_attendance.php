@@ -15,9 +15,9 @@ function sendSMS($user_id, $api_key, $message, $to, $sender_id, $contact_fname =
     $response = curl_exec($ch);
 
     if (curl_errno($ch)) {
-        echo 'Error:' . curl_error($ch);
+        error_log('cURL Error: ' . curl_error($ch));
     } else {
-        echo 'Response:' . $response;
+        error_log('SMS API Response: ' . $response);
     }
 
     curl_close($ch);
@@ -50,5 +50,6 @@ foreach ($student_ids as $record) {
 
 echo "Attendance saved successfully.";
 ?><a href="all_attandance.php">View All</a>
+<?php
 $conn->close();
 ?>
