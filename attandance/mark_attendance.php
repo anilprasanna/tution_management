@@ -20,7 +20,7 @@ $result = $students->get_result();
         <?php
         if ($result->num_rows > 0) {
             echo "============== TEST ==============";
-            echo "$result->fetch_assoc()"
+            echo "$result->fetch_assoc()";
             while ($student = $result->fetch_assoc()) {
                 echo '<div class="form-check">
                         <input class="form-check-input" type="checkbox" name="student_ids[]" value="' . $student['id'] . '-' . $student['phone'] . '" id="student' . $student['id'] . '">
