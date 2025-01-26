@@ -11,7 +11,6 @@ $sender_id = "NotifyDEMO";
 
 $course_id = $_POST['course_id'];
 $student_ids = $_POST['student_ids'] ?? [];
-print_r($student_ids);
 
 // Assume you're marking the attendance for the current day
 $today = date('Y-m-d');
