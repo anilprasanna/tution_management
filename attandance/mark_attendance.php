@@ -22,7 +22,7 @@ $result = $students->get_result();
             
             while ($student = $result->fetch_assoc()) {
                 echo '<div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="student_ids[]" value="' . $student['id'] . '-' . $student['phone'] . '" id="student' . $student['id'] . '">
+                        <input class="form-check-input" type="checkbox" name="student_ids[]" value="' . $student['id'] . '-' . $student['phone'] . '-' . $student['name'] . '" id="student' . $student['id'] . '">
                         <label class="form-check-label" for="student' . $student['id'] . '">' .
                         htmlspecialchars($student['name']) .
                         '</label>
