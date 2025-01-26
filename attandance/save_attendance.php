@@ -1,28 +1,26 @@
 <?php
-require_once(__DIR__ . '/notify-php-master/autoload.php');
 include 'db.php'; // Database connection
 
 // SMS sending function
 function sendSMS($user_id, $api_key, $message, $to, $sender_id, $contact_fname = "", $contact_lname = "", $contact_email = "", $contact_address = "", $contact_group = 0, $type = null) {
-    $api_instance = new NotifyLk\Api\SmsApi();
-    
-    try {
-        $api_instance->sendSMS(
-            $user_id, 
-            $api_key, 
-            $message, 
-            $to, 
-            $sender_id, 
-            $contact_fname, 
-            $contact_lname, 
-            $contact_email, 
-            $contact_address, 
-            $contact_group, 
-            $type
-        );
-    } catch (Exception $e) {
-        echo 'Exception when calling SmsApi->sendSMS: ', $e->getMessage(), PHP_EOL;
+    $url = "https://app.notify.lk/api/v1/send?user_id=$user_id&api_key=$api_key&sender_id=$sender_id&to=$to&message=" . urlencode($message);
+
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+    curl_setopt($ch, CURLOPT_HTTPGET, true);
+
+    $response = curl_exec($ch);
+
+    if (curl_errno($ch)) {
+        echo 'Error:' . curl_error($ch);
+    } else {
+        echo 'Response:' . $response;
     }
+
+    curl_close($ch);
 }
 
 // SMS Configuration
