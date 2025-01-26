@@ -1,27 +1,7 @@
 <?php
 include 'db.php'; // Database connection
 
-// SMS sending function
-function sendSMS($user_id, $api_key, $message, $to, $sender_id, $contact_fname = "", $contact_lname = "", $contact_email = "", $contact_address = "", $contact_group = 0, $type = null) {
-    $url = "https://app.notify.lk/api/v1/send?user_id=$user_id&api_key=$api_key&sender_id=$sender_id&to=$to&message=" . urlencode($message);
 
-    $ch = curl_init();
-
-    curl_setopt($ch, CURLOPT_URL, $url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-    curl_setopt($ch, CURLOPT_HTTPGET, true);
-
-    $response = curl_exec($ch);
-
-    if (curl_errno($ch)) {
-        error_log('cURL Error: ' . curl_error($ch));
-    } else {
-        error_log('SMS API Response: ' . $response);
-    }
-
-    curl_close($ch);
-}
 
 // SMS Configuration
 $user_id = "28901";
@@ -45,8 +25,13 @@ foreach ($student_ids as $record) {
     $stmt->execute();
 
     // Send SMS to the student
-    sendSMS($user_id, $api_key, $message, $phone, $sender_id);
+    // sendSMS($user_id, $api_key, $message, $phone, $sender_id);
+    $curl_command = "curl --location 'https://app.notify.lk/api/v1/send?user_id=28901&api_key=ZigKDUc4CD06laWrhz7D&sender_id=NotifyDEMO&to=+94718784949&message=Test'";
+    shell_exec($curl_command);
 }
+
+$curl_command = "curl --location 'https://app.notify.lk/api/v1/send?user_id=28901&api_key=ZigKDUc4CD06laWrhz7D&sender_id=NotifyDEMO&to=+94718784949&message=Test'";
+shell_exec($curl_command);
 
 echo "Attendance saved successfully.";
 ?><a href="all_attandance.php">View All</a>
