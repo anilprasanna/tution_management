@@ -24,7 +24,7 @@ foreach ($student_ids as $record) {
     $stmt->execute();
 
     // Call the REST API
-    $message = "This is a test message";
+    $message = "This is a test message $name";
     $api_url = "https://app.notify.lk/api/v1/send?user_id=28901&api_key=ZigKDUc4CD06laWrhz7D&sender_id=NotifyDEMO&to=$phone&message=$message";
     $ch = curl_init();
 
