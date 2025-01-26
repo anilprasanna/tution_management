@@ -19,11 +19,9 @@ $result = $students->get_result();
         <input type="hidden" name="course_id" value="<?php echo $course_id; ?>">
         <?php
         if ($result->num_rows > 0) {
-            echo "============== TEST ==============";
-            // print the results as a list
-            print_r($result);
             
             while ($student = $result->fetch_assoc()) {
+                print_r($student);
                 echo '<div class="form-check">
                         <input class="form-check-input" type="checkbox" name="student_ids[]" value="' . $student['id'] . '-' . $student['phone'] . '" id="student' . $student['id'] . '">
                         <label class="form-check-label" for="student' . $student['id'] . '">' .
